@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/style.css" />
     <title>What Should I Watch?</title>
 </head>
+
 <body>
-    <header class= "hero">
-        <h1 class="page-title">What hould I Watch?</h1>
+    <header class="hero">
+        <h1 class="page-title col-12">What hould I Watch?</h1>
         <p>Here to help decide what movie to watch tonight!</p>
     </header>
 
-        <main>
-            <div>
-                <form class="genreForm">
-                  <fieldset>
-                      <legend>Pick your genres</legend>
-                      <div>
+    <main>
+        <div>
+            <form class="1">
+                <fieldset>
+                    <legend>Pick your genres</legend>
+                    <div>
                         <label class="Form1-label" for="Prompt-1">Comedy</label>
-                        <input name="genre" id="genre" type="checkbox"/>
-                      </div>
-                      <div>
+                        <input name="genre" id="genre" type="checkbox" />
+                    </div>
+                    <div>
                         <label class="Form1-label" for="Prompt-1">Action</label>
-                        <input name="genre" id="genre" type="checkbox"/>
-                      </div>
-                      <div>
+                        <input name="genre" id="genre" type="checkbox" />
+                    </div>
+                    <div>
                         <label class="Form1-label" for="Prompt-1">Horror</label>
-                        <input name="genre" id="genre" type="checkbox"/>
-                      </div>
-                      <div>
+                        <input name="genre" id="genre" type="checkbox" />
+                    </div>
+                    <div>
                         <label class="Form1-label" for="Prompt-1">Rom-com</label>
-                        <input name="genre" id="genre" type="checkbox"/>
-                      </div>
-                      <div>
+                        <input name="genre" id="genre" type="checkbox" />
+                    </div>
+                    <div>
                         <label class="Form1-label" for="Prompt-1">Cartoon</label>
-                        <input name="genre" id="genre" type="checkbox"/>
-                      </div>
-                  </fieldset>
-                </form>
+                        <input name="genre" id="genre" type="checkbox" />
+                    </div>
+                </fieldset>
+            </form>
+            <div class="2">
+                <h2>Ratings</h2>
                 <div class="slidecontianer">
-                    <input type="range" min="1" max="10" class="ratings" id="ratingRange">
+                    <input type="range" min="1" max="10" class="maxRating" id="ratingRange">
                 </div>
-                <button>Search</button>
             </div>
-        </main>
+            <div class="3">
+                <fieldset>
+                    <legend>PG Rating</legend>
+                    <div>
+                        <label class="pgRating" for="prompt-3">G</label>
+                        <input name="pg" id="pg" type="checkbox" />
+                    </div>
+                    <div>
+                        <label class="pgRating" for="prompt-3">PG</label>
+                        <input name="pg" id="pg" type="checkbox" />
+                    </div>
+                    <div>
+                        <label class="pgRating" for="prompt-3">PG-13</label>
+                        <input name="pg" id="pg" type="checkbox" />
+                    </div>
+                    <div>
+                        <label class="pgRating" for="prompt-3">R</label>
+                        <input name="pg" id="pg" type="checkbox" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <button>Search</button>
+        </div>
+    </main>
 </body>
+
 </html>
