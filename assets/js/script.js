@@ -1,6 +1,7 @@
 var responseDataEl = document.querySelector("#response-data");
 var titleEl = document.querySelector("#title");
 var imgEl = document.querySelector("#img-card");
+var enterBtn = document.querySelector("#enter");
 
 var getMovieTitle = function(movieId) {
     var apiUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed";
@@ -9,18 +10,22 @@ var getMovieTitle = function(movieId) {
         console.log(response);
         response.json().then(function(data) {
             console.log(data);
+            console.log(data.certifications);
             titleEl.textContent = data.title;
             })
         }
     });
 }
 
-// function to create random movie id
+// function to search for a movie based on rating
 var movieIdGen = function() {
     var movieId = "550988";
-    getMovieTitle(movieId)
+    getMovieTitle(movieId);
+
 };
 
 movieIdGen();
+
+enterBtn.addEventListener("click", movieIdGen());
 
 
