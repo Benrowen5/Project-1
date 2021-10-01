@@ -42,7 +42,7 @@
                         <input name="genre" id="genre" type="checkbox" />
                     </div>
                 </fieldset>
-            </form>
+            
             <div class="2">
                 <h2>Ratings</h2>
                 <div class="slidecontianer">
@@ -50,28 +50,27 @@
                 </div>
             </div>
             <div class="3">
-                <fieldset>
+                <form>
                     <legend>PG Rating</legend>
-                    <div>
-                        <label class="pgRating" for="prompt-3">G</label>
-                        <input name="pg" id="pg" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="pgRating" for="prompt-3">PG</label>
-                        <input name="pg" id="pg" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="pgRating" for="prompt-3">PG-13</label>
-                        <input name="pg" id="pg" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="pgRating" for="prompt-3">R</label>
-                        <input name="pg" id="pg" type="checkbox" />
-                    </div>
-                </fieldset>
+                        <label for="gRating">G</label>
+                        <input id="gRating" name="gRating" value="rating" type="checkbox" /><br>
+                    
+                        <label for="pgRating">PG</label>
+                        <input id="pgRating" name="pgRating" value="rating" type="checkbox" /><br>
+                    
+                        <label for="pg13Rating">PG-13</label>
+                        <input id="pg13Rating" name="pg13Rating" value="rating" type="checkbox" /><br>
+                    
+                        <label for="rRating">R</label>
+                        <input id="rRating" name="rRating" value="rating" type="checkbox" /><br>
+                        <input id="searchBtn" type="submit">Search</input>
+                </form>
             </div>
+            
+            </form>
+            
         </div>
-        <button>Search</button>
+        
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
