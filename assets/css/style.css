@@ -11,21 +11,12 @@
     padding-top: 25px;
 }
 
-main{
-    width: 100%;
-}
-
-body{
-    height: 100vh;
-}
-
 .prompts{
     z-index: 999;
     background-color: white;
     margin-bottom: 0;
     height: 100%;
     min-height: 100vh;
-  
 }
 
 .hero p{
@@ -65,12 +56,9 @@ body{
     background-color: aqua;
 }
 
-.botDiv{
-    background-color: yellow;
-}
-
-.topDiv{
-    background-color: tomato;
+#img1{
+    height: 700px;
+    width: 100%;
 }
 /*#imgs {
     position:relative;
