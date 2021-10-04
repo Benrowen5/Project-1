@@ -159,6 +159,7 @@ discoverMovies([28], 8);
 //         "id": 37,
 //         "name": "Western"
 //     }
+<<<<<<< HEAD
 // ]
 
 
@@ -172,3 +173,6 @@ discoverMovies([28], 8);
 
 
 
+=======
+// ]
+>>>>>>> feature/style

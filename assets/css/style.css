@@ -61,39 +61,8 @@ img{
     width: 100%;
 }
 
-
-
-/*#imgs {
-    position:relative;
-    margin: 0 auto;
-    height: 100vh;
-    z-index: 0;
+.results{
+  color: black;
+  font-size: 40px;
 }
 
-#imgs img {
-    position: absolute;
-    left:0;
-    transition: opacity 1s ease-in-out;
-}
-
-@keyframes imgsFadeInOut{
-    0%{
-        opacity: 1;
-    }
-    45%{
-        opacity: 1;
-    }
-    55%{opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-
-#imgs img.top{
-    animation-name: imgsFadeInOut;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-duration: 10s;
-    animation-direction: alternate;
-}
