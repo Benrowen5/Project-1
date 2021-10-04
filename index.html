@@ -17,59 +17,81 @@
         <p>Here to help decide what movie to watch tonight!</p>
     </header>
 
-    <main class="row">
-        <div class="col-4 imgs" id="imgs1">
-            <img class="bottom" src="assets/images/Simu-liu-shang-chi-and-the-legend-of-the-ten-rings-1200.jpeg" />
-            <img src="assets/images/2806004-jaws.jpg"/>
-            <img src="assets/images/grownups.jfif"/>
-        </div>
-        <div class="col-4 prompts">
-            <form class="one">
-                <fieldset>
-                    <legend>Pick your genres</legend>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="35">Comedy</label>
-                        <input name="genre" id="genre" type="checkbox" />
+    <main>
+        <div class="container">
+            <div class="row">
+                <!--<div class="col-4" id="imgs">
+                 <img class="bottom" src="assets/images/Simu-liu-shang-chi-and-the-legend-of-the-ten-rings-1200.jpeg" />
+                 <img class="top" src="assets/images/frozen.jfif" />
+                </div>-->
+                <div class="col prompts">
+                    <form class="one">
+                        <fieldset>
+                            <legend>Pick your genres</legend>
+                            <div>
+                                <div class="input-wrap">
+                                    <input name="genre" id="genre" type="checkbox" class="form-check-input" />
+                                </div>
+                                <label class="Form1-label" for="Prompt-1">Comedy</label>
+                            </div>
+                            <div>
+                                <div class="input-wrap">
+                                    <input name="genre" id="genre" type="checkbox" class="form-check-input" />
+                                </div>
+                                <label class="Form1-label" for="Prompt-1">Action</label>
+                            </div>
+                            <div>
+                                <div class="input-wrap">
+                                    <input name="genre" id="genre" type="checkbox" class="form-check-input" />
+                                </div>
+                                <label class="Form1-label" for="Prompt-1">Horror</label>
+                            </div>
+                            <div>
+                                <div class="input-wrap">
+                                    <input name="genre" id="genre" type="checkbox" class="form-check-input" />
+                                </div>
+                                <label class="Form1-label" for="Prompt-1">Rom-com</label>
+                            </div>
+                            <div>
+                                <div class="input-wrap">
+                                    <input name="genre" id="genre" type="checkbox" class="form-check-input" />
+                                </div>
+                                <label class="Form1-label" for="Prompt-1">Cartoon</label>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="two">
+                        <h2>Ratings</h2>
+                        <div class="slidecontianer">
+                            <input type="range" min="1" max="10" class="maxRating" id="ratingRange">
+                        </div>
                     </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="28">Action</label>
-                        <input name="genre" id="genre" type="checkbox" />
+                    <div class="one">
+                        <fieldset>
+                            <legend>PG Rating</legend>
+                            <div>
+                             <input name="pg" id="pg" type="checkbox" />
+                             <label class="pgRating" for="prompt-3">G</label>
+                            </div>
+                            <div>
+                                <input name="pg" id="pg" type="checkbox" />
+                                <label class="pgRating" for="prompt-3">PG</label>
+                                
+                            </div>
+                            <div>
+                                <input name="pg" id="pg" type="checkbox" />
+                                <label class="pgRating" for="prompt-3">PG-13</label>
+                                
+                            </div>
+                            <div>
+                                <input name="pg" id="pg" type="checkbox" />
+                                <label class="pgRating" for="prompt-3">R</label>
+                                </div>
+                        </fieldset>
                     </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="27">Horror</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="10749">Rom-com</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="16">Animation</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="12">Adventure</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="80">Crime</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="99">Documentary</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="18">Drama</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="10751">Family</label>
-                        <input name="genre" id="genre" type="checkbox" />
-                    </div>
-                    <div>
-                        <label class="Form1-label" for="Prompt-1" id="14">Fantasy</label>
-                        <input name="genre" id="genre" type="checkbox" />
+                    <button class="searchBtn col-4">Search</button>
+                    <div class="Results">
+                        <!--Results-->
                     </div>
                     <div>
                         <label class="Form1-label" for="Prompt-1" id="36">History</label>
