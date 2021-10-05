@@ -120,7 +120,7 @@ var checkGenre = function(){
 
 var checkRating = function () {
   // param for average rating
-  selectedRating = "&vote_average.gte=" 
+  // selectedRating = "&vote_average.gte=" 
     //var minimumRating = "";
 
     // get value from rating slider and add to minimumRating var
@@ -134,7 +134,7 @@ var discoverMovies = async function() {
   // check selected genres
   checkGenre();
   // check movie rating
-  checkMpaaRating();
+  checkRating();
     
     var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedRating + selectedGenre;
     fetch(apiUrl).then(function(response) {
