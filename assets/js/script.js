@@ -22,29 +22,30 @@ var tvMovie = document.getElementById("10770");
 var thriller = document.getElementById("53");
 var war = document.getElementById("10752");
 var western = document.getElementById("37");
+var rating = document.getElementById("ratingRange")
 
 var apiKey = "e7f1b20f0b6095eb3bfbbb6951d074ed";
-var selectedRating = "";
+var selectedMpaaRating = "";
 var selectedGenre = "";
-var selectedRating = "";
+var selectedMinRating = "";
 
 var checkMpaaRating = function(event) {
-  selectedRating = "&certification_country=US";
+  selectedMpaaRating = "&certification_country=US";
     if (gRating.checked) {
         console.log("G rating checked");
-        selectedRating += "&certification=G";
+        selectedMpaaRating += "&certification=G";
     }
     if (pgRating.checked) {
         console.log("PG rating selected");
-        selectedRating += "&certification=PG";
+        selectedMpaaRating += "&certification=PG";
     }
     if (pg13Rating.checked) {
         console.log("PG-13 rating selected");
-        selectedRating += "&certification=PG-13";
+        selectedMpaaRating += "&certification=PG-13";
     }
     if (rRating.checked) {
         console.log("R rating selected");
-        selectedRating += "&certification=R";
+        selectedMpaaRating += "&certification=R";
     };
 };
 
@@ -119,11 +120,11 @@ var checkGenre = function(){
 };
 
 var checkRating = function () {
-  // param for average rating
-  // selectedRating = "&vote_average.gte=" 
-    //var minimumRating = "";
-
-    // get value from rating slider and add to minimumRating var
+  // param for average rating, minimum of 50 ratings
+  selectedMinRating = "&vote_count.gte=50&vote_average.gte=" 
+  // get value from rating slider and add to minimumRating var
+  selectedMinRating += rating.value;
+  console.log(selectedMinRating)
 };
 
 
@@ -136,7 +137,7 @@ var discoverMovies = async function() {
   // check movie rating
   checkRating();
     
-    var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedRating + selectedGenre;
+    var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
     fetch(apiUrl).then(function(response) {
     if(response.ok) {
         console.log(response);
