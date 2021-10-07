@@ -28,6 +28,7 @@ var apiKey = "e7f1b20f0b6095eb3bfbbb6951d074ed";
 var selectedMpaaRating = "";
 var selectedGenre = "";
 var selectedMinRating = "";
+var movieDisplay = [];
 
 var checkMpaaRating = function(event) {
   selectedMpaaRating = "&certification_country=US";
@@ -139,36 +140,30 @@ var discoverMovies = async function() {
     
     var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
     fetch(apiUrl).then(function(response) {
-    if(response.ok) {
+      if(response.ok) {
         console.log(response);
         response.json().then(function(data) {
             console.log(data);
-            })
-        }
+            // loop to pull random 4 results from the data object returned.
+            // need to include a loop which includes results from all pages (only 20 results show per page)
+            // each page contains 3 useful fields for pagination - page, total_results, and total_pages.
+            // check number of total pages, an api call is needed for each page(?)
+            // ex: https://api.themoviedb.org/3/discover/movie/?api_key...&page=1
+            //     https://api.themoviedb.org/3/discover/movie/?api_key...&page=2
+            // Only up to page 1000 is allowed to be accessed per request.
+            // api call limitation as well of 60 calls per minute i think.
+
+            for (i=0; i<4; i++) {
+              let random = Math.floor(Math.random()*data.total_results)
+              movieDisplay.push(data[random])
+            }       
+            console.log(movieDisplay)
+        })
+      }
     });
 }
 
-// var discoverMovies = async function () {
-//   checkMpaaRating();
-//   checkGenre();
-  // checkRating();
-  // arrayGenres, minimumRating, selectedRating
 
-  // arrayGenres is going to look something like [1, 2, 3]
-  // our API expects a string like "1,2,3"
-  // arrayGenres.join(',')
-  // &with_genres=1,2,3
-  // var apiUrl =
-  //   "https://api.themoviedb.org/3/discover/movie/?api_key="+
-  //   apiKey;
-    // "&certification_country=US" +
-    // selectedRating +
-    // "&vote_average.gte=" + // param for average rating
-    // minimumRating +
-    // "&with_genres=" + // param for genres
-    // arrayGenres.join(",") +
-    // "&vote_count.gte=500"; // must have greater than 500 ratings
-//   console.log(apiUrl);
 // //   fetch(apiUrl).then((resp) => resp.json().then((data) => console.log(data))).catch();
 //   try {
 //     var resp = await fetch(apiUrl)
