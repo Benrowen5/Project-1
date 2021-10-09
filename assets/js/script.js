@@ -130,98 +130,89 @@ var checkRating = function () {
   console.log(selectedMinRating)
 };
 
+var pageCheck = function(data){
+    // results < 20 works, but doesn't include check for duplicates.
+  if (data.total_results <= 20) {
+    for (i=0; i<4; i++) {
+      // debugger;
+      // console.log(data.total_results);
+      random = Math.floor(Math.random()*data.total_results);
+      // console.log(random)
+      allPages.push(data.results[random]);
+      console.log(allPages[i].title);
+    }
+  }
+
+  if (data.total_results > 20) {
+    setTimeout(() => {
+      results(allPages); 
+    }, 1000)   
+    // start at i=1 because pagination starts at 1
+    for (i=1; i<=data.total_pages; i++) {
+      // make API call for each page of results data
+      apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating + "&page=" + [i];
+      fetch(apiUrl).then(function(response) {
+        if(response.ok) {
+          response.json().then(function(data) {
+            console.log(data);
+            //  debugger;
+            // generate array containing results from each page in API response
+            for (i=0; i<data.results.length; i++) {
+              // console.log(data.results[i].title);
+              allPages.push(data.results[i].title);
+              // allPages.push(data.results[i]);
+              // console.log(allPages);       
+            }
+             
+          })
+        }             
+      })
+    }
+    
+  }
+};
+
+
+
+var results = function(allPages) {
+  // generate 4 random movies
+  for (i=0; i<4; i++) {
+    // debugger;
+    random = Math.floor(Math.random()*allPages.length);
+    // console.log(random)
+    movieDisplay.push(allPages[random]);
+    console.log(movieDisplay);
+  }
+}
+
+
 
 // Discover Movies
-var discoverMovies = async function() {
+var discoverMovies = function() {
+  // clear storage variables
+  movieDisplay = [];
+  allPages = [];
   // check selected MPAA ratings
   checkMpaaRating();
   // check selected genres
   checkGenre();
   // check movie rating
   checkRating();
-    
-    var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
-    fetch(apiUrl).then(function(response) {
-      if(response.ok) {
-        // console.log(response);
-        response.json().then(function(data) {
-            // console.log(data);
-  // loop to pull random 4 results from the data object returned.
-  // need to include a loop which includes results from all pages (only 20 results show per page)
-  // each page contains 3 useful fields for pagination - page, total_results, and total_pages.
-  // check number of total pages, an api call is needed for each page(?)
-  // ex: https://api.themoviedb.org/3/discover/movie/?api_key...&page=1
-  //     https://api.themoviedb.org/3/discover/movie/?api_key...&page=2
-  // Only up to page 1000 is allowed to be accessed per request.
-  // api call limitation as well of 60 calls per minute i think.
-
-            // loop to get results from all pages and store each into array allPages
-            // start i = 1 since no page 0 exists
-            for (i=0; i<data.total_pages; i++) {
-              apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating + "&page=" + [i+1];
-              fetch(apiUrl).then(function(response) {
-                if(response.ok) {
-                  response.json().then(function(data) {
-                    // console.log(data);
-                    // debugger;
-                    // generate array containing results from each page in API response
-                    for (i=0; i<data.results.length; i++) {
-                      allPages.push(data.results[i]);
-                    }
-                    console.log(allPages);
-                    // loop to generate 4 random movies from array containing data for all results from all pages
-                    for (i=0; i<4; i++) {
-                      // debugger;
-                      random = Math.floor(Math.random()*allPages.length);
-                      console.log(random)
-                      console.log(allPages[random].title);
-                      // movieDisplay.push(allPages[i].title);
-                    };
-                    // console.log(movieDisplay);
-                  })
-                }
-              });
-            }
-            // // loop to generate 4 random movies from array containing data for all results from all pages
-            // for (i=0; i<4; i++) {
-            //   let random = Math.floor(Math.random()*allPages.length);
-            //   // console.log(random);
-            //   // console.log(allPages);
-            //   movieDisplay.push(allPages.random);
-            // };       
-            // console.log(movieDisplay)
-        })
-      }
-    });
+  
+  var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
+  fetch(apiUrl).then(function(response) {
+    if(response.ok) {
+      // console.log(response);
+      response.json().then(function(data) {
+          console.log(data);
+          pageCheck(data);
+      })
+    }
+  })
+  // console.log(allPages)
 }
-
-
-// //   fetch(apiUrl).then((resp) => resp.json().then((data) => console.log(data))).catch();
-//   try {
-//     var resp = await fetch(apiUrl)
-//     var data = await resp.json()
-//       console.log(data)
-//     // at this point you have a variable 'data' that contains the results of the API call. do with it what you want
-//   } catch {
-//     alert('api request failed')
-//   }
-// };
-// this request fetches all movies in the genre 'action' that have an average rating of 8 or greater and which have greater than 500 ratings
-// the 'greater than 500 ratings' part is abstracted in the function
-// i.e. you do not need to specify a minimum rating threshold in the function call
-// discoverMovies([28], 8);
-// the genre ids that can be used with the API are as follows:
+  
+    
+  
 
 searchBtnEl.addEventListener("click", discoverMovies);
-
-
-
-
-
-
-
-
-
-
-
-
