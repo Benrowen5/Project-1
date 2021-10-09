@@ -132,6 +132,8 @@ var checkRating = function () {
 };
 
 var pageCheck = function(data){
+  // reset covers
+  movieOptions.innerHTML = "";
     // results < 20 works, but doesn't include check for duplicates.
   if (data.total_results <= 20) {
     for (i=0; i<4; i++) {
