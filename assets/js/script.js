@@ -23,6 +23,7 @@ var thriller = document.getElementById("53");
 var war = document.getElementById("10752");
 var western = document.getElementById("37");
 var rating = document.getElementById("ratingRange")
+var movieOptions = document.getElementById("results-container");
 
 var apiKey = "e7f1b20f0b6095eb3bfbbb6951d074ed";
 var selectedMpaaRating = "";
@@ -140,6 +141,13 @@ var pageCheck = function(data){
       // console.log(random)
       allPages.push(data.results[random]);
       console.log(allPages[i].title);
+      // console.log(data.results[random].poster_path);
+
+      let movie = document.createElement("div");
+      // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
+      let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
+      movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      movieOptions.appendChild(movie);
     }
   }
 
@@ -182,6 +190,7 @@ var results = function(allPages) {
     // console.log(random)
     movieDisplay.push(allPages[random]);
     console.log(movieDisplay);
+    
   }
 }
 
