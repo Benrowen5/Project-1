@@ -29,6 +29,8 @@ var selectedMpaaRating = "";
 var selectedGenre = "";
 var selectedMinRating = "";
 var movieDisplay = [];
+var allPages = [];
+
 
 var checkMpaaRating = function(event) {
   selectedMpaaRating = "&certification_country=US";
@@ -141,23 +143,53 @@ var discoverMovies = async function() {
     var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
     fetch(apiUrl).then(function(response) {
       if(response.ok) {
-        console.log(response);
+        // console.log(response);
         response.json().then(function(data) {
-            console.log(data);
-            // loop to pull random 4 results from the data object returned.
-            // need to include a loop which includes results from all pages (only 20 results show per page)
-            // each page contains 3 useful fields for pagination - page, total_results, and total_pages.
-            // check number of total pages, an api call is needed for each page(?)
-            // ex: https://api.themoviedb.org/3/discover/movie/?api_key...&page=1
-            //     https://api.themoviedb.org/3/discover/movie/?api_key...&page=2
-            // Only up to page 1000 is allowed to be accessed per request.
-            // api call limitation as well of 60 calls per minute i think.
+            // console.log(data);
+  // loop to pull random 4 results from the data object returned.
+  // need to include a loop which includes results from all pages (only 20 results show per page)
+  // each page contains 3 useful fields for pagination - page, total_results, and total_pages.
+  // check number of total pages, an api call is needed for each page(?)
+  // ex: https://api.themoviedb.org/3/discover/movie/?api_key...&page=1
+  //     https://api.themoviedb.org/3/discover/movie/?api_key...&page=2
+  // Only up to page 1000 is allowed to be accessed per request.
+  // api call limitation as well of 60 calls per minute i think.
 
-            for (i=0; i<4; i++) {
-              let random = Math.floor(Math.random()*data.total_results)
-              movieDisplay.push(data[random])
-            }       
-            console.log(movieDisplay)
+            // loop to get results from all pages and store each into array allPages
+            // start i = 1 since no page 0 exists
+            for (i=0; i<data.total_pages; i++) {
+              apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating + "&page=" + [i+1];
+              fetch(apiUrl).then(function(response) {
+                if(response.ok) {
+                  response.json().then(function(data) {
+                    // console.log(data);
+                    // debugger;
+                    // generate array containing results from each page in API response
+                    for (i=0; i<data.results.length; i++) {
+                      allPages.push(data.results[i]);
+                    }
+                    console.log(allPages);
+                    // loop to generate 4 random movies from array containing data for all results from all pages
+                    for (i=0; i<4; i++) {
+                      // debugger;
+                      random = Math.floor(Math.random()*allPages.length);
+                      console.log(random)
+                      console.log(allPages[random].title);
+                      // movieDisplay.push(allPages[i].title);
+                    };
+                    // console.log(movieDisplay);
+                  })
+                }
+              });
+            }
+            // // loop to generate 4 random movies from array containing data for all results from all pages
+            // for (i=0; i<4; i++) {
+            //   let random = Math.floor(Math.random()*allPages.length);
+            //   // console.log(random);
+            //   // console.log(allPages);
+            //   movieDisplay.push(allPages.random);
+            // };       
+            // console.log(movieDisplay)
         })
       }
     });
