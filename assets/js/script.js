@@ -202,6 +202,8 @@ var displayResults = function(allPages, posterPath) {
     movieOptions.appendChild(movie);    
   }
   console.log(movieDisplay);
+  // open modal to show results
+  modal.setAttribute("style", "display: block");
 };
 
 // main function called by click eventListener 
@@ -210,9 +212,6 @@ var discoverMovies = function() {
   movieDisplay = [];
   allPages = [];
   posterPath = [];
-
-  // open modal to show results
-  modal.setAttribute("style", "display: block");
 
   // check selected MPAA ratings
   checkMpaaRating();
