@@ -219,49 +219,6 @@ var pageCheck = function(data){
     }
   }
 
-<<<<<<< HEAD
-var results = function(allPages) {
-  // generate 4 random movies
-  for (i=0; i<4; i++) {
-    // debugger;
-    random = Math.floor(Math.random()*allPages.length);
-    // console.log(random)
-    movieDisplay.push(allPages[random]);
-    console.log(movieDisplay);
-    
-  }
-}
-
-
-
-// Discover Movies
-var discoverMovies = function() {
-  // clear storage variables
-  movieDisplay = [];
-  allPages = [];
-  // check selected MPAA ratings
-  checkMpaaRating();
-  // check selected genres
-  checkGenre();
-  // check movie rating
-  checkRating();
-  
-  var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
-  fetch(apiUrl).then(function(response) {
-    if(response.ok) {
-      // console.log(response);
-      response.json().then(function(data) {
-          console.log(data);
-          pageCheck(data);
-      })
-    }
-  })
-  // console.log(allPages)
-}
-  
-    
-  
-=======
   if (data.total_results > 20) {
     setTimeout(() => {
       results(allPages); 
@@ -304,7 +261,6 @@ var results = function(allPages) {
     
   }
 }
->>>>>>> 77707fbe17834c5b12cfab82a1b13398e7767c7e
 
 searchBtnEl.addEventListener("click", discoverMovies);
 
