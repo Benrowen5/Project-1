@@ -152,9 +152,11 @@ var pageCheck = function(data){
       // console.log(data.results[random].poster_path);
 
       let movie = document.createElement("div");
+      movie.setAttribute("style", "display: inline");
       // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
       let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
       movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      modal.setAttribute("style", "display: block");
       movieOptions.appendChild(movie);
     }
   }
