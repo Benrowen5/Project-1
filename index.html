@@ -109,7 +109,7 @@
             <div class="score">
                 <h2>Viewer Score</h2>
                 <div class="slide-container">
-                    0 <input type="range" min="1" max="10" value="5" class="maxRating" id="ratingRange"> 10
+                    1 <input type="range" min="1" max="10" value="1" class="maxRating" id="ratingRange"> 10
                 </div>
             </div>
             <div class="rating">
@@ -129,6 +129,7 @@
                 </form>
             </div>
             <button id="searchBtn" type="submit" class="col-4">Search</button>
+            <button id="saved-searches" type="submit" class="col-4">Past Results</button>
             
             <!-- results modal -->
             <div class="modal" id="modal">
@@ -138,6 +139,19 @@
                         <span class="close" id="close">&times;</span>
                     </div>
                     <div id="results-container">            
+                    </div>
+                </div>
+            </div>
+
+            <!-- past results modal -->
+            <div class="modal" id="saved-modal">
+                <div class="results-modal">
+                    <div class="modal-header">
+                        <h2>Your Previous Results:</h2>
+                        <span class="close" id="close-saved">&times;</span>
+                    </div>
+                    <div id="saved-container">
+                        <ul id="saved-list"></ul>            
                     </div>
                 </div>
             </div>

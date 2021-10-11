@@ -1,4 +1,5 @@
 var searchBtnEl = document.querySelector("#searchBtn"); 
+var pastSearchesEl = document.querySelector("#saved-searches")
 var gRatingCheckbox = document.getElementById("gRating");
 var pgRatingCheckbox = document.getElementById("pgRating");
 var pg13RatingCheckbox = document.getElementById("pg13Rating");
@@ -24,6 +25,7 @@ var war = document.getElementById("10752");
 var western = document.getElementById("37");
 var rating = document.getElementById("ratingRange")
 var movieOptions = document.getElementById("results-container");
+var savedContainer = document.getElementById("saved-container")
 
 var apiKey = "e7f1b20f0b6095eb3bfbbb6951d074ed";
 var selectedMpaaRating = "";
@@ -35,6 +37,9 @@ var posterPath = [];
 
 var modal = document.getElementById("modal");
 var close = document.getElementById("close");
+var closeSaved = document.getElementById("close-saved");
+var savedModal = document.getElementById("saved-modal")
+var savedList = document.getElementById("saved-list");
 
 var checkMpaaRating = function(event) {
   selectedMpaaRating = "&certification_country=US";
@@ -140,6 +145,7 @@ var pageCheck = function(data){
     // if statement for when there are less than 20 results, or only 1 page of results
   if (data.total_results <= 20) {
     if (data.total_results === 0) {
+      
       alert("No movie results found that meet search criteria. Please try again.");
     }
     for (i=0; i<4; i++) {
@@ -156,6 +162,8 @@ var pageCheck = function(data){
       let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
       movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
       movieOptions.appendChild(movie);
+      // save movies to localStorage
+      localStorage.setItem('movie-title', JSON.stringify(movieDisplay));
     }
   }
 
@@ -199,17 +207,18 @@ var displayResults = function(allPages, posterPath) {
     movie.setAttribute("style", "display: inline")
     let imgUrl = "http://image.tmdb.org/t/p/w500" + posterPath[random];
     movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
-    movieOptions.appendChild(movie);    
+    movieOptions.appendChild(movie);
   }
   console.log(movieDisplay);
   // open modal to show results
+  localStorage.setItem('movie-title', JSON.stringify(movieDisplay));
   modal.setAttribute("style", "display: block");
 };
 
 // main function called by click eventListener 
 var discoverMovies = function() {
   // clear results storage variables
-  movieDisplay = [];
+  // movieDisplay = [];
   allPages = [];
   posterPath = [];
 
@@ -232,13 +241,32 @@ var discoverMovies = function() {
   })
 };
 
+var displaySaved = function() {
+  console.log(movieDisplay);
+  savedModal.setAttribute("style", "display: block");
+  // let savedMovie = JSON.parse(localStorage.getItem('movie-title', movieDisplay));
+  for (i=0; i<movieDisplay.length; i++) {
+    let savedTitle = document.createElement("li");
+    savedTitle.textContent = savedMovie[i];
+    savedList.appendChild(savedTitle);
+
+    // savedTitle.textContent = savedMovie[i];
+    // saved-list.appendChild(savedTitle);
+  }
+  
+};
+
 var closeModal = function() {
   movieDisplay = [];
   allPages = [];
   posterPath = [];
+  savedModal.setAttribute("style", "display: none");
   modal.setAttribute("style", "display: none");
+  
 };
   
 // event listener which 
 searchBtnEl.addEventListener("click", discoverMovies);
+pastSearchesEl.addEventListener("click", displaySaved);
 close.addEventListener("click", closeModal);
+closeSaved.addEventListener("click", closeModal);
