@@ -153,9 +153,9 @@ var pageCheck = function(data){
 
       let movie = document.createElement("div");
       movie.setAttribute("style", "display: inline");
-      // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
-      let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
-      movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      // movie.setAttribute("src", "https://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
+      let imgUrl = "https://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
+      movie.innerHTML = "<img src='https://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
       modal.setAttribute("style", "display: block");
       movieOptions.appendChild(movie);
     }
@@ -199,8 +199,8 @@ var displayResults = function(allPages, posterPath) {
     movieDisplay.push(allPages[random]);
     let movie = document.createElement("div");
     movie.setAttribute("style", "display: inline")
-    let imgUrl = "http://image.tmdb.org/t/p/w500" + posterPath[random];
-    movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
+    let imgUrl = "https://image.tmdb.org/t/p/w500" + posterPath[random];
+    movie.innerHTML = "<img src='https://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
     movieOptions.appendChild(movie);    
   }
   console.log(movieDisplay);
