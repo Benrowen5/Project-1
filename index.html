@@ -17,18 +17,17 @@
     </header>
 
     <main class="row">
-        <div class="col-4 imgsOne" id="imgs1">
-            <div class="sticky-top">
-            <img class="img-fluid" src="assets/images/Simu-liu-shang-chi-and-the-legend-of-the-ten-rings-1200.jpeg" />
-            <img class="img-fluid" src="assets/images/2806004-jaws.jpg"/>
-            <img class="img-fluid" src="assets/images/grownups.jfif"/>
-            <img class= "img-fluid" src="assets/images/no_country -for-old-men.jpg"/>
+        <div class="col-4 imgs" id="imgs1">
+            <img class="bottom" src="assets/images/Simu-liu-shang-chi-and-the-legend-of-the-ten-rings-1200.jpeg" />
+            <img src="assets/images/2806004-jaws.jpg"/>
+            <img src="assets/images/grownups.jfif"/>
+            <img src="assets/images/no_country -for-old-men.jpg"/>
             </div>
         </div>
         <div class="col-4 prompts">
-            <form class="one col-12">
+            <form class="genres col-12">
                 <fieldset>
-                    <legend>Pick your genres</legend>
+                    <legend>Pick Your Genres</legend>
                     <div>
                         <label>Comedy</label>
                         <input class="genre" name="Comedy" id="35" type="checkbox" value="Comedy" />
@@ -107,15 +106,15 @@
                     </div>
                 </fieldset>
             </form>
-            <div class="two">
-                <h2>Ratings</h2>
+            <div class="score">
+                <h2>Viewer Score</h2>
                 <div class="slide-container">
                     0 <input type="range" min="1" max="10" value="5" class="maxRating" id="ratingRange"> 10
                 </div>
             </div>
-            <div class="three">
+            <div class="rating">
                 <fieldset>
-                    <legend>PG Rating</legend>
+                    <legend>MPAA Rating</legend>
                         <label for="gRating">G</label>
                         <input id="gRating" name="gRating" value="rating" type="checkbox" /><br>
                     
@@ -130,19 +129,25 @@
                 </form>
             </div>
             <button id="searchBtn" type="submit" class="col-4">Search</button>
-            <div class="results">
-                <h2>Results:</h2>
-                <!--Results-->
-                <div id="results-container">
+            
+            <!-- results modal -->
+            <div class="modal" id="modal">
+                <div class="results-modal">
+                    <div class="modal-header">
+                        <h2>Your Results:</h2>
+                        <span class="close" id="close">&times;</span>
+                    </div>
+                    <div id="results-container">            
+                    </div>
                 </div>
             </div>
+            
         </div>
-        <div class="col-4 imgsTwo">
-            <div class="sticky-top">
-             <img class="img-fluid" src="assets/images/frozen.jfif" />
-             <img class="img-fluid" src="assets/images/Shining.jfif"/>
-             <img class="img-fluid" src="assets/images/meangirls.jpg"/>
-             <img class="img-fluid" src="assets/images/avatar.jfif"/>
+        <div class="col-4 imgs">
+             <img id="bot1" src="assets/images/frozen.jfif" />
+             <img src="assets/images/Shining.jfif"/>
+             <img src="assets/images/meangirls.jpg"/>
+             <img src="assets/images/avatar.jfif"/>
             </div>
         </div>
 
