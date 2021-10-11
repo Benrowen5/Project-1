@@ -33,6 +33,8 @@ var movieDisplay = [];
 var allPages = [];
 var posterPath = [];
 
+var modal = document.getElementById("modal");
+var close = document.getElementById("close");
 
 var checkMpaaRating = function(event) {
   selectedMpaaRating = "&certification_country=US";
@@ -208,6 +210,9 @@ var discoverMovies = function() {
   allPages = [];
   posterPath = [];
 
+  // open modal to show results
+  modal.setAttribute("style", "display: block");
+
   // check selected MPAA ratings
   checkMpaaRating();
   // check selected genres
@@ -226,6 +231,14 @@ var discoverMovies = function() {
     }
   })
 };
+
+var closeModal = function() {
+  movieDisplay = [];
+  allPages = [];
+  posterPath = [];
+  modal.setAttribute("style", "display: none");
+}
   
 // event listener which 
 searchBtnEl.addEventListener("click", discoverMovies);
+close.addEventListener("click", closeModal);
