@@ -158,9 +158,11 @@ var pageCheck = function(data){
       // console.log(data.results[random].poster_path);
 
       let movie = document.createElement("div");
-      // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
-      let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
-      movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      movie.setAttribute("style", "display: inline");
+      // movie.setAttribute("src", "https://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
+      let imgUrl = "https://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
+      movie.innerHTML = "<img src='https://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      modal.setAttribute("style", "display: block");
       movieOptions.appendChild(movie);
       // save movies to localStorage
       localStorage.setItem('movie-title', JSON.stringify(movieDisplay));
@@ -205,9 +207,9 @@ var displayResults = function(allPages, posterPath) {
     movieDisplay.push(allPages[random]);
     let movie = document.createElement("div");
     movie.setAttribute("style", "display: inline")
-    let imgUrl = "http://image.tmdb.org/t/p/w500" + posterPath[random];
-    movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
-    movieOptions.appendChild(movie);
+    let imgUrl = "https://image.tmdb.org/t/p/w500" + posterPath[random];
+    movie.innerHTML = "<img src='https://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
+    movieOptions.appendChild(movie);    
   }
   console.log(movieDisplay);
   // open modal to show results
