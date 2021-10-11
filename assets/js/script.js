@@ -31,7 +31,6 @@ var selectedGenre = "";
 var selectedMinRating = "";
 var movieDisplay = [];
 var allPages = [];
-var posterPath = [];
 
 
 var checkMpaaRating = function(event) {
@@ -125,8 +124,8 @@ var checkGenre = function(){
 };
 
 var checkRating = function () {
-  // param for average rating, minimum of 20 ratings
-  selectedMinRating = "&vote_count.gte=20&vote_average.gte=" 
+  // param for average rating, minimum of 50 ratings
+  selectedMinRating = "&vote_count.gte=50&vote_average.gte=" 
   // get value from rating slider and add to minimumRating var
   selectedMinRating += rating.value;
   console.log(selectedMinRating)
@@ -135,11 +134,8 @@ var checkRating = function () {
 var pageCheck = function(data){
   // reset covers
   movieOptions.innerHTML = "";
-    // if statement for when there are less than 20 results, or only 1 page of results
+    // results < 20 works, but doesn't include check for duplicates.
   if (data.total_results <= 20) {
-    if (data.total_results === 0) {
-      alert("No movie results found that meet search criteria. Please try again.");
-    }
     for (i=0; i<4; i++) {
       // debugger;
       // console.log(data.total_results);
@@ -157,11 +153,9 @@ var pageCheck = function(data){
     }
   }
 
-  // if statement for when there are multiple pages of results
   if (data.total_results > 20) {
-    // timeout to wait for page results data to be fetched.
     setTimeout(() => {
-      displayResults(allPages, posterPath); 
+      results(allPages); 
     }, 1000)   
     // start at i=1 because pagination starts at 1
     for (i=1; i<=data.total_pages; i++) {
@@ -171,43 +165,44 @@ var pageCheck = function(data){
         if(response.ok) {
           response.json().then(function(data) {
             console.log(data);
-            // Populate 2 different arrays containing results for paths to movie posters and 
-            // movie titles from each page in API response
+            //  debugger;
+            // generate array containing results from each page in API response
             for (i=0; i<data.results.length; i++) {
-              // local variable to store movie poster paths
-              let pageResults = data.results[i].poster_path;
-              // store paths for movie links into global variable to access in displayResults function
-              posterPath.push(pageResults);
+              // console.log(data.results[i].title);
               allPages.push(data.results[i].title);
+              // allPages.push(data.results[i]);
+              // console.log(allPages);       
             }
+             
           })
         }             
       })
     }
+    
   }
 };
 
-var displayResults = function(allPages, posterPath) {
-  // generate 4 random movies from results for all pages
+
+
+var results = function(allPages) {
+  // generate 4 random movies
   for (i=0; i<4; i++) {
+    // debugger;
     random = Math.floor(Math.random()*allPages.length);
-    // push random result to 
+    // console.log(random)
     movieDisplay.push(allPages[random]);
-    let movie = document.createElement("div");
-    let imgUrl = "http://image.tmdb.org/t/p/w500" + posterPath[random];
-    movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
-    movieOptions.appendChild(movie);    
+    console.log(movieDisplay);
+    
   }
-  console.log(movieDisplay);
-};
+}
 
-// main function called by click eventListener 
+
+
+// Discover Movies
 var discoverMovies = function() {
-  // clear results storage variables
+  // clear storage variables
   movieDisplay = [];
   allPages = [];
-  posterPath = [];
-
   // check selected MPAA ratings
   checkMpaaRating();
   // check selected genres
@@ -225,7 +220,10 @@ var discoverMovies = function() {
       })
     }
   })
-};
+  // console.log(allPages)
+}
   
-// event listener which 
+    
+  
+
 searchBtnEl.addEventListener("click", discoverMovies);
