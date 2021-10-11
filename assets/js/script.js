@@ -187,6 +187,63 @@ var pageCheck = function(data){
   }
 };
 
+var checkRating = function () {
+  // param for average rating, minimum of 50 ratings
+  selectedMinRating = "&vote_count.gte=50&vote_average.gte=" 
+  // get value from rating slider and add to minimumRating var
+  selectedMinRating += rating.value;
+  console.log(selectedMinRating)
+};
+
+var pageCheck = function(data){
+    // results < 20 works, but doesn't include check for duplicates.
+  if (data.total_results <= 20) {
+    for (i=0; i<4; i++) {
+      // debugger;
+      // console.log(data.total_results);
+      random = Math.floor(Math.random()*data.total_results);
+      // console.log(random)
+      allPages.push(data.results[random]);
+      console.log(allPages[i].title);
+      // console.log(data.results[random].poster_path);
+
+      let movie = document.createElement("div");
+      // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
+      let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
+      movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      movieOptions.appendChild(movie);
+    }
+  }
+
+  if (data.total_results > 20) {
+    setTimeout(() => {
+      results(allPages); 
+    }, 1000)   
+    // start at i=1 because pagination starts at 1
+    for (i=1; i<=data.total_pages; i++) {
+      // make API call for each page of results data
+      apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating + "&page=" + [i];
+      fetch(apiUrl).then(function(response) {
+        if(response.ok) {
+          response.json().then(function(data) {
+            console.log(data);
+            //  debugger;
+            // generate array containing results from each page in API response
+            for (i=0; i<data.results.length; i++) {
+              // console.log(data.results[i].title);
+              allPages.push(data.results[i].title);
+              // allPages.push(data.results[i]);
+              // console.log(allPages);       
+            }
+             
+          })
+        }             
+      })
+    }
+    
+  }
+};
+
 var displayResults = function(allPages, posterPath) {
   // generate 4 random movies from results for all pages
   for (i=0; i<4; i++) {
