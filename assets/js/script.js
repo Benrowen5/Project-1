@@ -196,6 +196,7 @@ var displayResults = function(allPages, posterPath) {
     // push random result to 
     movieDisplay.push(allPages[random]);
     let movie = document.createElement("div");
+    movie.setAttribute("style", "display: inline")
     let imgUrl = "http://image.tmdb.org/t/p/w500" + posterPath[random];
     movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + posterPath[random] + "' height: 100px width:auto />"
     movieOptions.appendChild(movie);    
@@ -237,7 +238,7 @@ var closeModal = function() {
   allPages = [];
   posterPath = [];
   modal.setAttribute("style", "display: none");
-}
+};
   
 // event listener which 
 searchBtnEl.addEventListener("click", discoverMovies);
