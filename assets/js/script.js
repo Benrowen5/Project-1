@@ -1,175 +1,230 @@
 var searchBtnEl = document.querySelector("#searchBtn"); 
-var gRatingCheckbox = document.getElementById("#gRating");
-var pgRatingCheckbox = document.getElementById("#pgRating");
-var pg13RatingCheckbox = document.getElementById("#pg13Rating");
-var rRatingCheckbox = document.getElementById("#rRating");
+var gRatingCheckbox = document.getElementById("gRating");
+var pgRatingCheckbox = document.getElementById("pgRating");
+var pg13RatingCheckbox = document.getElementById("pg13Rating");
+var rRatingCheckbox = document.getElementById("rRating");
+var comedy = document.getElementById("35");
+var action = document.getElementById("28");
+var horror = document.getElementById("27");
+var romance = document.getElementById("10749");
+var animation = document.getElementById("16");
+var adventure = document.getElementById("12");
+var crime = document.getElementById("80");
+var documentary = document.getElementById("99");
+var drama = document.getElementById("18");
+var family = document.getElementById("10751");
+var fantasy = document.getElementById("14");
+var history = document.getElementById("36");
+var music = document.getElementById("10402");
+var scienceFiction = document.getElementById("878");
+var mystery = document.getElementById("9648");
+var tvMovie = document.getElementById("10770");
+var thriller = document.getElementById("53");
+var war = document.getElementById("10752");
+var western = document.getElementById("37");
+var rating = document.getElementById("ratingRange")
+var movieOptions = document.getElementById("results-container");
 
-var getMovieTitle = function(selectedRating) {
-    var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedRating;
-    fetch(apiUrl).then(function(response) {
-    if(response.ok) {
-        console.log(response);
-        response.json().then(function(data) {
-            console.log(data);
-            })
-        }
-    });
-}
+var apiKey = "e7f1b20f0b6095eb3bfbbb6951d074ed";
+var selectedMpaaRating = "";
+var selectedGenre = "";
+var selectedMinRating = "";
+var movieDisplay = [];
+var allPages = [];
 
-// function to search for a movie based on rating
-var movieIdGen = function() {
-    selectedRating
-    getMovieTitle(movieId);
 
-};
-
-var checkRating = function(event) {
-    var selectedRating = "&certification_country=US";
-    event.preventDefault();
+var checkMpaaRating = function(event) {
+  selectedMpaaRating = "&certification_country=US";
     if (gRating.checked) {
         console.log("G rating checked");
-        selectedRating += "&certification=G";
+        selectedMpaaRating += "&certification=G";
     }
     if (pgRating.checked) {
         console.log("PG rating selected");
-        selectedRating += "&certification=PG";
+        selectedMpaaRating += "&certification=PG";
     }
     if (pg13Rating.checked) {
         console.log("PG-13 rating selected");
-        selectedRating += "&certification=PG-13";
+        selectedMpaaRating += "&certification=PG-13";
     }
     if (rRating.checked) {
         console.log("R rating selected");
-        selectedRating += "&certification=R";
+        selectedMpaaRating += "&certification=R";
     };
-    getMovieTitle(selectedRating);
 };
 
-// movieIdGen();
+var checkGenre = function(){
+  // include genres for API call
+  selectedGenre = "&with_genres=";
+  // create a new array that adds each genre selected.
+  var genres = [];
+  // check for selected genres
+    if (comedy.checked) {
+       genres.push('35');
+    }
+    if (action.checked) {
+      genres.push('28')
+    }
+    if (horror.checked) {
+      genres.push('27')
+    }
+    if (romance.checked) {
+      genres.push('10749')
+    }
+    if (animation.checked) {
+      genres.push('16')
+    }
+    if (adventure.checked) {
+      genres.push('12')
+    }
+    if (crime.checked) {
+      genres.push('80')
+    }
+    if (documentary.checked) {
+      genres.push('99')
+    }
+    if (drama.checked) {
+      genres.push('18')
+    }
+    if (family.checked) {
+      genres.push('10751')
+    }
+    if (fantasy.checked) {
+      genres.push('14')
+    }
+    if (history.checked) {
+      genres.push('36')
+    }
+    if (music.checked) {
+      genres.push('10402')
+    }
+    if (scienceFiction.checked) {
+      genres.push('878')
+    }
+    if (mystery.checked) {
+      genres.push('9648')
+    }
+    if (tvMovie.checked) {
+      genres.push('10770')
+    }
+    if (thriller.checked) {
+      genres.push('53')
+    }
+    if (war.checked) {
+      genres.push('10752')
+    }
+    if (western.checked) {
 
-searchBtnEl.addEventListener("click", checkRating);
+      genres.push('37')
+    }
+    // join all selected genres to include in genres API call.
+    genres.join(".");
+    selectedGenre += genres
+    console.log(selectedGenre);
+};
 
+var checkRating = function () {
+  // param for average rating, minimum of 50 ratings
+  selectedMinRating = "&vote_count.gte=50&vote_average.gte=" 
+  // get value from rating slider and add to minimumRating var
+  selectedMinRating += rating.value;
+  console.log(selectedMinRating)
+};
 
-/ movieIdGen();
-// Discover Movies
-var discoverMovies = async function (arrayGenres, minimumRating) {
-  // arrayGenres is going to look something like [1, 2, 3]
-  // our API expects a string like "1,2,3"
-  // arrayGenres.join(',')
-  // &with_genres=1,2,3
-  var apiUrl =
-    "https://api.themoviedb.org/3/discover/movie" +
-    "?api_key=" +
-    apiKey +
-    "&vote_average.gte=" + // param for average rating
-    minimumRating +
-    "&with_genres=" + // param for genres
-    arrayGenres.join(",") +
-    "&vote_count.gte=500"; // must have greater than 500 ratings
-  console.log(apiUrl);
-//   fetch(apiUrl).then((resp) => resp.json().then((data) => console.log(data))).catch();
-  try {
-    var resp = await fetch(apiUrl)
-    var data = await resp.json()
-    // console.log(data)
-    // at this point you have a variable 'data' that contains the results of the API call. do with it what you want
-  } catch {
-    alert('api request failed')
+var pageCheck = function(data){
+    // results < 20 works, but doesn't include check for duplicates.
+  if (data.total_results <= 20) {
+    for (i=0; i<4; i++) {
+      // debugger;
+      // console.log(data.total_results);
+      random = Math.floor(Math.random()*data.total_results);
+      // console.log(random)
+      allPages.push(data.results[random]);
+      console.log(allPages[i].title);
+      // console.log(data.results[random].poster_path);
+
+      let movie = document.createElement("div");
+      // movie.setAttribute("src", "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path);
+      let imgUrl = "http://image.tmdb.org/t/p/w500" + data.results[random].poster_path;
+      movie.innerHTML = "<img src='http://image.tmdb.org/t/p/w500" + data.results[random].poster_path + "' height: 100px width:auto />"
+      movieOptions.appendChild(movie);
+    }
+  }
+
+  if (data.total_results > 20) {
+    setTimeout(() => {
+      results(allPages); 
+    }, 1000)   
+    // start at i=1 because pagination starts at 1
+    for (i=1; i<=data.total_pages; i++) {
+      // make API call for each page of results data
+      apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating + "&page=" + [i];
+      fetch(apiUrl).then(function(response) {
+        if(response.ok) {
+          response.json().then(function(data) {
+            console.log(data);
+            //  debugger;
+            // generate array containing results from each page in API response
+            for (i=0; i<data.results.length; i++) {
+              // console.log(data.results[i].title);
+              allPages.push(data.results[i].title);
+              // allPages.push(data.results[i]);
+              // console.log(allPages);       
+            }
+             
+          })
+        }             
+      })
+    }
+    
   }
 };
-// this request fetches all movies in the genre 'action' that have an average rating of 8 or greater and which have greater than 500 ratings
-// the 'greater than 500 ratings' part is abstracted in the function
-// i.e. you do not need to specify a minimum rating threshold in the function call
-discoverMovies([28], 8);
-// the genre ids that can be used with the API are as follows:
-// "genres": [
-//     {
-//         "id": 28,
-//         "name": "Action"
-//     },
-//     {
-//         "id": 12,
-//         "name": "Adventure"
-//     },
-//     {
-//         "id": 16,
-//         "name": "Animation"
-//     },
-//     {
-//         "id": 35,
-//         "name": "Comedy"
-//     },
-//     {
-//         "id": 80,
-//         "name": "Crime"
-//     },
-//     {
-//         "id": 99,
-//         "name": "Documentary"
-//     },
-//     {
-//         "id": 18,
-//         "name": "Drama"
-//     },
-//     {
-//         "id": 10751,
-//         "name": "Family"
-//     },
-//     {
-//         "id": 14,
-//         "name": "Fantasy"
-//     },
-//     {
-//         "id": 36,
-//         "name": "History"
-//     },
-//     {
-//         "id": 27,
-//         "name": "Horror"
-//     },
-//     {
-//         "id": 10402,
-//         "name": "Music"
-//     },
-//     {
-//         "id": 9648,
-//         "name": "Mystery"
-//     },
-//     {
-//         "id": 10749,
-//         "name": "Romance"
-//     },
-//     {
-//         "id": 878,
-//         "name": "Science Fiction"
-//     },
-//     {
-//         "id": 10770,
-//         "name": "TV Movie"
-//     },
-//     {
-//         "id": 53,
-//         "name": "Thriller"
-//     },
-//     {
-//         "id": 10752,
-//         "name": "War"
-//     },
-//     {
-//         "id": 37,
-//         "name": "Western"
-//     }
-
-// ]
 
 
 
+var results = function(allPages) {
+  // generate 4 random movies
+  for (i=0; i<4; i++) {
+    // debugger;
+    random = Math.floor(Math.random()*allPages.length);
+    // console.log(random)
+    movieDisplay.push(allPages[random]);
+    console.log(movieDisplay);
+    
+  }
+}
 
 
 
+// Discover Movies
+var discoverMovies = function() {
+  // clear storage variables
+  movieDisplay = [];
+  allPages = [];
+  // check selected MPAA ratings
+  checkMpaaRating();
+  // check selected genres
+  checkGenre();
+  // check movie rating
+  checkRating();
+  
+  var apiUrl = "https://api.themoviedb.org/3/discover/movie/?api_key=e7f1b20f0b6095eb3bfbbb6951d074ed" + selectedMpaaRating + selectedGenre + selectedMinRating;
+  fetch(apiUrl).then(function(response) {
+    if(response.ok) {
+      // console.log(response);
+      response.json().then(function(data) {
+          console.log(data);
+          pageCheck(data);
+      })
+    }
+  })
+  // console.log(allPages)
+}
+  
+    
+  
 
-
-
+searchBtnEl.addEventListener("click", discoverMovies);
 
 
 
