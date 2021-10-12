@@ -244,17 +244,18 @@ var discoverMovies = function() {
 };
 
 var displaySaved = function() {
-  console.log(movieDisplay);
+  // console.log(movieDisplay);
   savedModal.setAttribute("style", "display: block");
-  // let savedMovie = JSON.parse(localStorage.getItem('movie-title', movieDisplay));
-  for (i=0; i<movieDisplay.length; i++) {
+  let savedMovie = JSON.parse(localStorage.getItem('movie-title'));
+  // console.log(savedMovie);
+  // loop to create a list item for each movie in localStorage
+  for (i=0; i<savedMovie.length; i++) {
     let savedTitle = document.createElement("li");
+    savedTitle.setAttribute("class", "list-group-item");
+    savedTitle.setAttribute("style", "background-color: rgba(77, 75, 75, 0); color: white");
     savedTitle.textContent = savedMovie[i];
     savedList.appendChild(savedTitle);
-
-    // savedTitle.textContent = savedMovie[i];
-    // saved-list.appendChild(savedTitle);
-  }
+  };
   
 };
 
