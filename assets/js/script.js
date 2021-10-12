@@ -40,6 +40,7 @@ var close = document.getElementById("close");
 var closeSaved = document.getElementById("close-saved");
 var savedModal = document.getElementById("saved-modal")
 var savedList = document.getElementById("saved-list");
+var clearHistoryEl = document.getElementById("clear-history");
 
 var checkMpaaRating = function(event) {
   selectedMpaaRating = "&certification_country=US";
@@ -256,7 +257,6 @@ var displaySaved = function() {
     savedTitle.textContent = savedMovie[i];
     savedList.appendChild(savedTitle);
   };
-  
 };
 
 var closeModal = function() {
@@ -265,11 +265,17 @@ var closeModal = function() {
   posterPath = [];
   savedModal.setAttribute("style", "display: none");
   modal.setAttribute("style", "display: none");
-  
 };
+
+var clearStorage = function() {
+  localStorage.clear();
+  savedList.textContent = "";
+  movieDisplay = [];
+}
   
 // event listener which 
 searchBtnEl.addEventListener("click", discoverMovies);
 pastSearchesEl.addEventListener("click", displaySaved);
+clearHistoryEl.addEventListener("click", clearStorage);
 close.addEventListener("click", closeModal);
 closeSaved.addEventListener("click", closeModal);

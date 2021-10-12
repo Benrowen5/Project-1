@@ -68,7 +68,8 @@ legend{
     margin-top: 30px;
 }
 
-#searchBtn{
+#searchBtn, #saved-searches,
+#clear-history {
     display: block;
     align-items: center;
     margin: auto;
@@ -77,12 +78,12 @@ legend{
     background-color: aqua;
 }
 
-#searchBtn:hover{
+#searchBtn:hover, #saved-searches:hover {
     background-color: black;
     color:orangered;
     font-weight: bolder;
 }
-
+/* 
 #saved-searches {
     display: block;
     align-items: center;
@@ -96,7 +97,7 @@ legend{
     background-color: black;
     color:orangered;
     font-weight: bolder;
-}
+} */
 
 img{
     height: fit-content;
@@ -198,7 +199,7 @@ input[type="checkbox"]:checked {
     border: 2px solid black;
 }
 
-#save-movies {
+#clear-history {
     display: block;
     align-items: center;
     margin: auto;
@@ -209,7 +210,7 @@ input[type="checkbox"]:checked {
     background-color: white;
 }
 
-#save-movies:hover {
+#clear-history:hover {
     color: white;
     border: 2px solid white;
     border-radius: 15px;
