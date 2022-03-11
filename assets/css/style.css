@@ -28,24 +28,17 @@ h1{
 }
 /* END HEADER STYLES */
 
-
+/* PROMPTS STYLES */
 .prompts{
     z-index: 999;
     background-color: white;
     margin-bottom: 0;
-    /* height: 100%; */
-    /* min-height: 100vh; */
     font-size: 20px;
 }
 
 legend{
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.hero p{
     font-size: 24px;
-    padding-left: 50px;
+    font-weight: bold;
 }
 
 .genres, .score, .rating {
@@ -61,7 +54,7 @@ legend{
 .score {
     text-align: center;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 24px;
     background-color: white;
     color: black;
 }
@@ -71,6 +64,7 @@ legend{
     margin: auto;
     margin-top: 30px;
 }
+/* END PROMPTS STYLES */
 
 #searchBtn, #saved-searches,
 #clear-history {
@@ -103,6 +97,7 @@ legend{
     font-weight: bolder;
 } */
 
+/* MOVIE COVERS STYLES */
 img{
     height: fit-content;
     width: 100%;
@@ -157,14 +152,15 @@ input[type="checkbox"]:checked {
     padding: auto;
     top: 75px;
     left: 5%;
-    /* right:50px; */
     width: 90%;
+    height: fit-content;
     max-height: 75%;
     overflow: auto;
     background: rgba(77, 75, 75, 0.95);
     border: black solid 5px;
     border-radius: 15px;
     box-shadow: 0 0 50px 20px white;
+    padding-bottom: 65px;
 }
 
 .modal-header {
@@ -196,7 +192,7 @@ input[type="checkbox"]:checked {
 
 .modal img {
     flex: 2;
-    height: 350px;
+    height: 325px;
     width: auto;
     margin: 20px;
     border-radius: 5px;
@@ -247,29 +243,37 @@ input[type='range']::-webkit-slider-thumb {
     box-shadow: -250px 0 0 250px black;
 }
 
+@media screen and (max-width: 1200px) {
+    .modal img {
+        margin: 5px;
+        width: auto;
+        height: 300px;
+    }
+}
+
 @media screen and (max-width: 980px) {
     .page-title {
         font-size: 75px;
     }
     .modal {
         width: 90%;
-        height: 50%;
+    }
+
+    .results-container {
+        display:flex;
+        flex-wrap: nowrap;
+        padding-bottom: 0;
     }
 
     .modal img {
-        height: 250px;
         width: auto;
+        height: 200px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .page-title {
         font-size: 55px;
-    }
-    .modal img {
-        margin: 5px;
-        width: auto;
-        height: 200px;
     }
 }
 
@@ -307,10 +311,4 @@ input[type='range']::-webkit-slider-thumb {
     .body{
         font-size: 12px;
     }
-
-    .modal {
-        width: 90%;
-        height: 75%;
-    }
-
 }
