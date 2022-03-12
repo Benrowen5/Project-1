@@ -8,15 +8,21 @@ body{
     overflow-x: hidden;
 }
 
+main {
+    padding-bottom: 10px;
+}
+
+/* HEADER STYLES */
 .hero{
     background: linear-gradient(rgba(0,0,0,1), rgba(255,255,255,1) ) ;
     width:100%;
-    height: 150px;
-    padding-left: 25px;
-    padding-top: 25px;
+    min-height: 150px;
     font-size: 100px;
     color: white;
     text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 h1{
@@ -24,24 +30,21 @@ h1{
     text-shadow: 3px 3px rgba(253,79,44,.25);
     margin-bottom: 25px;
 }
+/* END HEADER STYLES */
 
+/* PROMPTS STYLES */
 .prompts{
     z-index: 999;
     background-color: white;
     margin-bottom: 0;
-    height: 100%;
-    min-height: 100vh;
-    font-size: 28px;
+    font-size: 20px;
+    line-height: 100%;
+
 }
 
 legend{
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.hero p{
     font-size: 24px;
-    padding-left: 50px;
+    font-weight: bold;
 }
 
 .genres, .score, .rating {
@@ -57,7 +60,7 @@ legend{
 .score {
     text-align: center;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 24px;
     background-color: white;
     color: black;
 }
@@ -67,6 +70,7 @@ legend{
     margin: auto;
     margin-top: 30px;
 }
+/* END PROMPTS STYLES */
 
 #searchBtn, #saved-searches,
 #clear-history {
@@ -75,6 +79,7 @@ legend{
     margin: auto;
     margin-top: 25px;
     border-radius: 15px;
+    width: 200px;
     background-color: aqua;
 }
 
@@ -99,6 +104,7 @@ legend{
     font-weight: bolder;
 } */
 
+/* MOVIE COVERS STYLES */
 img{
     height: fit-content;
     width: 100%;
@@ -153,14 +159,15 @@ input[type="checkbox"]:checked {
     padding: auto;
     top: 75px;
     left: 5%;
-    /* right:50px; */
     width: 90%;
+    height: fit-content;
     max-height: 75%;
     overflow: auto;
     background: rgba(77, 75, 75, 0.95);
     border: black solid 5px;
     border-radius: 15px;
     box-shadow: 0 0 50px 20px white;
+    padding-bottom: 65px;
 }
 
 .modal-header {
@@ -192,7 +199,7 @@ input[type="checkbox"]:checked {
 
 .modal img {
     flex: 2;
-    height: 350px;
+    height: 325px;
     width: auto;
     margin: 20px;
     border-radius: 5px;
@@ -243,27 +250,42 @@ input[type='range']::-webkit-slider-thumb {
     box-shadow: -250px 0 0 250px black;
 }
 
-@media screen and (max-width: 980px) {
-    .modal {
-        width: 90%;
-        height: 50%;
-    }
-
-    .modal img {
-        height: 250px;
-        width: auto;
-    }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .modal img {
         margin: 5px;
         width: auto;
-        height: 200px;
+        height: 300px;
+    }
+
+    #searchBtn, #saved-searches {
+        font-size: smaller;
     }
 }
 
-@media only screen and (max-width: 575px) {
+@media screen and (max-width: 980px) {
+    .page-title {
+        font-size: 75px;
+    }
+    .modal {
+        width: 90%;
+    }
+
+    .results-container {
+        display:flex;
+        flex-wrap: nowrap;
+        padding-bottom: 0;
+    }
+
+    .modal img {
+        width: auto;
+        height: 200px;
+    }
+
+    #searchBtn, #saved-searches {
+        font-size: small;
+        width: 100px;
+    }
+
     input[type='range'] {
         width: 100px;
         -webkit-appearance: none;
@@ -281,10 +303,17 @@ input[type='range']::-webkit-slider-thumb {
     input[type='range']::-webkit-slider-thumb {
         box-shadow: -100px 0 0 100px black;
     }
+}
 
-    #searchBtn{
-        font-size: 10px;
-        width: 60px;
+@media screen and (max-width: 768px) {
+    .page-title {
+        font-size: 55px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .page-title {
+        flex-shrink: 2;
     }
 
     h1{
@@ -295,9 +324,14 @@ input[type='range']::-webkit-slider-thumb {
         font-size: 12px;
     }
 
-    .modal {
-        width: 90%;
-        height: 75%;
+    .imgs {
+        display: none;
     }
 
+    main {
+        justify-content: center;
+    }
+    .prompts {
+        width: 75%;
+    }
 }
