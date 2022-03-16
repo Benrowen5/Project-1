@@ -38,7 +38,7 @@ h1{
     background-color: white;
     margin-bottom: 0;
     font-size: 20px;
-    line-height: 100%;
+    line-height: 105%;
 
 }
 
@@ -328,10 +328,23 @@ input[type='range']::-webkit-slider-thumb {
         display: none;
     }
 
+    #imgs1 {
+        display:contents;
+        position:absolute;
+        opacity: 50%;
+    }
+
     main {
         justify-content: center;
     }
     .prompts {
         width: 75%;
+        border: black solid 3px;
+        border-radius: 15px;
+        box-shadow: 0 0 50px 20px white;
+        padding-bottom: 20px;
+        position: absolute;
+        line-height: 120%;
+        margin-top: 50px;
     }
 }
